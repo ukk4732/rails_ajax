@@ -5,3 +5,31 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Contact.destroy_all
+Group.destroy_all
+
+group_ids = []
+
+group_ids << Group.create(name: "Family").id
+group_ids << Group.create(name: "Friends").id
+group_ids << Group.create(name: "Company").id
+
+p "#{group_ids.count} group created"
+
+contacts = []
+
+20.times do 
+  contacts << {
+    name: Faker::Name.name,
+    company: Faker::Company.name,
+    email: Faker::Internet.email,
+    phone: Faker::PhoneNumber.cell_phone,
+    address: "#{Faker::Address.street_address} #{Faker::Address.zip} #{Faker::Address.city}",
+    group_id: group_ids.sample
+  }
+end
+
+Contact.create(contacts)
+
+p "#{contacts.count} contact created"
