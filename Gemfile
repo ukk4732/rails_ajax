@@ -59,3 +59,5 @@ gem 'faker', '~> 1.9.4'
 gem 'bootstrap-sass'
 
 gem 'jquery-rails'
+
+gem 'kaminari'
