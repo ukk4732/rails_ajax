@@ -2,7 +2,7 @@
   <td class="middle">
     <div class="media">
       <div class="media-left">
-        <%= image_tag contact.gravatar, class: "media-object" %>
+        <%= image_tag contact.avatar.present? ? contact.avatar.url(:thumb) : contact.gravatar, class: "media-object" %>
       </div>
       <div class="media-body">
         <h4 class="media-heading"><%= contact.name %></h4>

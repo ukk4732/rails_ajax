@@ -63,3 +63,6 @@ gem 'jquery-rails'
 gem 'kaminari'
 
 gem 'pry'
+
+gem "paperclip"
+
