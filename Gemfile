@@ -66,3 +66,5 @@ gem 'pry'
 
 gem "paperclip"
 
+gem 'jasny-bootstrap-rails'
+
