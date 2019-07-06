@@ -2,6 +2,7 @@ class ContactsController < ApplicationController
   before_action :find_contact, only: [:edit, :update, :destroy]
 
   def index
+    session[:selected_group_id] = params[:group_id]
     if params[:group_id].present?
       @contacts = Group.find_by(id: params[:group_id]).contacts.order(created_at: "DESC").page(params[:page])    
     else
@@ -17,7 +18,7 @@ class ContactsController < ApplicationController
     @contact = Contact.new(contact_params)
     if @contact.save
       flash[:success] = "Contact created successfully"
-      redirect_to contacts_path
+      redirect_to contacts_path(group_id: session[:selected_group_id])
     else
       render 'new'
     end
@@ -29,7 +30,7 @@ class ContactsController < ApplicationController
   def update
     if @contact.update(contact_params)
       flash[:success] = "Contact updated successfully"
-      redirect_to contacts_path
+      redirect_to contacts_path(group_id: session[:selected_group_id])
     else
       render 'edit'
     end
@@ -38,7 +39,7 @@ class ContactsController < ApplicationController
   def destroy
     if @contact.destroy
       flash[:success] = "Contact deleted successfully"
-      redirect_to contacts_path
+      redirect_to contacts_path(group_id: session[:selected_group_id])
     else
       flash[:success] = "Something went wrong"
       redirect_to contacts_path
